@@ -46,6 +46,6 @@ void New_audio_pluginAudioProcessorEditor::InitializeSlider(juce::Slider& mGainS
     mGainSlider.setTextBoxStyle(newPosition, isReadOnly, textEntryBoxWidth, textEntryBoxHeight);
     mGainSlider.setRange(newMin, newMax, newInt);
     mGainSlider.setValue(newValue);
-    addAndMakeVisible(mGainSlider);//this makes the child fo the component visible.
+    addAndMakeVisible(mGainSlider);//this makes the child to the component visible.
 
 }
