@@ -24,7 +24,15 @@ public:
     void paint (juce::Graphics&) override;
     void resized() override;
 
+    void New_audio_pluginAudioProcessorEditor::InitializeSlider(juce::Slider& mGainSlider, juce::Slider::TextEntryBoxPosition newPosition, bool isReadOnly, int textEntryBoxWidth, int textEntryBoxHeight, juce::Slider::SliderStyle newStyle, double newMin, double newMax, double newInt, double newValue);
+
+
 private:
+    /// <summary>
+    /// The Gain slider Object 
+    /// </summary>
+    juce::Slider  mGainSlider;
+
     // This reference is provided as a quick way for your editor to
     // access the processor object that created it.
     New_audio_pluginAudioProcessor& audioProcessor;
