@@ -70,17 +70,13 @@ void New_audio_pluginAudioProcessorEditor::sliderValueChanged(juce::Slider* slid
         //maps values from -60db-0db to  new range 0.53%-100%      
         auto actualSliderValue = ((mGainSlider.getValue() - -60) * ((1 - 0.53) / (0 - (-60)))) + 0.53;
 
-
         float minimunvalue = 0.53f;
-       
-                   if(actualSliderValue> minimunvalue)
-                   {
-                       widthref = 300 * actualSliderValue;
-                       heightref = 200 * actualSliderValue;
-                       
-                       setSize(heightref, widthref);
-                       
-                   }
+        if(actualSliderValue> minimunvalue)
+        {
+            widthref = 300 * actualSliderValue;
+            heightref = 200 * actualSliderValue;
+            setSize(heightref, widthref);  
+        }
                  
         //TEST RESIZE UI SLIDER ENDSS
           
