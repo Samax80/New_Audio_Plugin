@@ -41,8 +41,9 @@ void New_audio_pluginAudioProcessorEditor::resized()
 {
     // This is generally where you'll want to lay out the positions of any
     // subcomponents in your editor..
+    auto actualSliderValue = ((mGainSlider.getValue() - -60) * ((1 - 0.53) / (0 - (-60)))) + 0.53;
 
-    mGainSlider.setBounds(getWidth() / 2 - 50, getHeight() / 2 - 75, 100, 150);
+    mGainSlider.setBounds(getWidth() / 2 - 50 * actualSliderValue, getHeight() / 2 - 75 * actualSliderValue, 100* actualSliderValue, 150* actualSliderValue);
 }
 
 void New_audio_pluginAudioProcessorEditor::InitializeSlider(juce::Slider& mGainSlider, juce::Slider::TextEntryBoxPosition newPosition, bool isReadOnly, int textEntryBoxWidth, int textEntryBoxHeight, juce::Slider::SliderStyle newStyle, double newMin, double newMax, double newInt, double newValue, juce::Slider::Listener * audio_pluginAudioProcessor)
