@@ -52,6 +52,13 @@ public:
     //==============================================================================
     void getStateInformation (juce::MemoryBlock& destData) override;
     void setStateInformation (const void* data, int sizeInBytes) override;
+    
+    /// <summary>
+    /// The gain variable
+    /// </summary>
+    float mGain{ 0.5 };
+    
+
 
 private:
     //==============================================================================

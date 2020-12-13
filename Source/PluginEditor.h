@@ -14,7 +14,12 @@
 //==============================================================================
 /**
 */
-class New_audio_pluginAudioProcessorEditor  : public juce::AudioProcessorEditor
+/// <summary>
+/// Class audio pluginAudioProcessorEditor 
+/// derives from juce::Slider::Slider to let the SLider modify the gain variable to the processor
+/// </summary>
+class New_audio_pluginAudioProcessorEditor  : public juce::AudioProcessorEditor,
+                                              public juce::Slider::Listener
 {
 public:
     New_audio_pluginAudioProcessorEditor (New_audio_pluginAudioProcessor&);
@@ -37,8 +42,19 @@ public:
     /// <param name="newMax">The new maximum Range.</param>
     /// <param name="newInt">The new interval value.</param>
     /// <param name="newValue">The new initial value.</param>
-    void New_audio_pluginAudioProcessorEditor::InitializeSlider(juce::Slider& mGainSlider, juce::Slider::TextEntryBoxPosition newPosition, bool isReadOnly, int textEntryBoxWidth, int textEntryBoxHeight, juce::Slider::SliderStyle newStyle, double newMin, double newMax, double newInt, double newValue);
+    /// <param name="audio_pluginAudioProcessor">The audio_pluginAudioProcessor pointer.</param>
+    void New_audio_pluginAudioProcessorEditor::InitializeSlider(juce::Slider& mGainSlider, juce::Slider::TextEntryBoxPosition newPosition, bool isReadOnly, int textEntryBoxWidth, int textEntryBoxHeight, juce::Slider::SliderStyle newStyle, double newMin, double newMax, double newInt, double newValue, juce::Slider::Listener* audio_pluginAudioProcessor);
+    
+    /// <summary>
+    /// Method to manage the on slider change,to notify the processor 
+    /// </summary>
+    /// <param name="slider">The slider.</param>
+    void New_audio_pluginAudioProcessorEditor::sliderValueChanged(juce::Slider* slider) override;
 
+    int width;
+    int height;
+    int& widthref = width;
+    int& heightref = height;
 
 private:
     /// <summary>
