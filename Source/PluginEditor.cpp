@@ -65,11 +65,9 @@ void New_audio_pluginAudioProcessorEditor::sliderValueChanged(juce::Slider* slid
         audioProcessor.mGain = mGainSlider.getValue();
         
         //TEST RESIZE UI SLIDER STARTS
-        //Once the plugin Ui  have been initialized it can be resized on sliderValue Changed between max  100% and minimum of 53%
-       // auto actualSliderValue = juce::Decibels::decibelsToGain(mGainSlider.getValue());
+        //Once the plugin Ui  have been initialized it can be resized on sliderValue Changed between max  100% and minimum of 53%     
 
-        //x=mGainSlider.getValue(), a=-60,b=0,c=0.53,d=1
-       //(mGainSlider.getValue(), -60, 0, 0.53, 1);
+        //maps values from -60db-0db to  new range 0.53%-100%      
         auto actualSliderValue = ((mGainSlider.getValue() - -60) * ((1 - 0.53) / (0 - -60))) + 0.53;
 
 
