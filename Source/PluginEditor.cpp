@@ -14,13 +14,13 @@ New_audio_pluginAudioProcessorEditor::New_audio_pluginAudioProcessorEditor (New_
     : AudioProcessorEditor (&p), audioProcessor (p)
 {   
 
-    InitializeSlider(mGainSlider, juce::Slider::TextBoxBelow, true, 50, 20, juce::Slider::SliderStyle::LinearVertical, 0.0f, 1.0f, 0.01, 0.5f,this);
+    InitializeSlider(mGainSlider, juce::Slider::TextBoxBelow, true, 50, 20, juce::Slider::SliderStyle::LinearVertical,-60.0f, 0.0f, 0.01, -20.0f,this);
 
     // Make sure that before the constructor has finished, you've set the
     // editor's size to whatever you need it to be.
     width = 200;
     height = 300;
-    auto actualSliderValue = mGainSlider.getValue();//TO BE ABLE TO START UP THE SIZE OF THE WINDOW WITH THE CURRENT SLIDER VALUE WHEN PLUGIN UI IS CREATED
+     auto actualSliderValue = ((mGainSlider.getValue() - -60) * ((1 - 0.53) / (0 - -60))) + 0.53;//TO BE ABLE TO START UP THE SIZE OF THE WINDOW WITH THE CURRENT SLIDER VALUE WHEN PLUGIN UI IS CREATED
 
     setSize(width* actualSliderValue, height* actualSliderValue);//here we set the size of the plugin window 
 }
@@ -66,7 +66,13 @@ void New_audio_pluginAudioProcessorEditor::sliderValueChanged(juce::Slider* slid
         
         //TEST RESIZE UI SLIDER STARTS
         //Once the plugin Ui  have been initialized it can be resized on sliderValue Changed between max  100% and minimum of 53%
-        auto actualSliderValue = mGainSlider.getValue();
+       // auto actualSliderValue = juce::Decibels::decibelsToGain(mGainSlider.getValue());
+
+        //x=mGainSlider.getValue(), a=-60,b=0,c=0.53,d=1
+       //(mGainSlider.getValue(), -60, 0, 0.53, 1);
+        auto actualSliderValue = ((mGainSlider.getValue() - -60) * ((1 - 0.53) / (0 - -60))) + 0.53;
+
+
         float minimunvalue = 0.53f;
        
                    if(actualSliderValue> minimunvalue)

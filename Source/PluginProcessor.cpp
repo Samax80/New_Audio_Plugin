@@ -143,7 +143,7 @@ void New_audio_pluginAudioProcessor::processBlock (juce::AudioBuffer<float>& buf
 
         for (int sample = 0; sample < buffer.getNumSamples(); ++sample)
         {
-            channelData[sample] = channelData[sample] * mGain;           
+            channelData[sample] = channelData[sample] *juce::Decibels::decibelsToGain( mGain);           
         }
     }
 }

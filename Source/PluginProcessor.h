@@ -56,7 +56,7 @@ public:
     /// <summary>
     /// The gain variable
     /// </summary>
-    float mGain{ 0.5 };
+    float mGain{-60};
     
 
 
