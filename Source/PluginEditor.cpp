@@ -13,8 +13,8 @@
 New_audio_pluginAudioProcessorEditor::New_audio_pluginAudioProcessorEditor (New_audio_pluginAudioProcessor& p)
     : AudioProcessorEditor (&p), audioProcessor (p)
 {   
-
-    InitializeSlider(mGainSlider, juce::Slider::TextBoxBelow, true, 50, 20, juce::Slider::SliderStyle::LinearVertical,-60.0f, 0.0f, 0.01, -20.0f,this);
+    auto newMinimunRange = -60.0f;
+    InitializeSlider(mGainSlider, juce::Slider::TextBoxBelow, true, 50, 20, juce::Slider::SliderStyle::LinearVertical, newMinimunRange, 0.0f, 0.01, -20.0f,this);
 
     // Make sure that before the constructor has finished, you've set the
     // editor's size to whatever you need it to be.
@@ -28,7 +28,7 @@ New_audio_pluginAudioProcessorEditor::New_audio_pluginAudioProcessorEditor (New_
     addAndMakeVisible(mVuMeter);
 
 
-     auto actualSliderValue = ((mGainSlider.getValue() - -60) * ((1 - 0.53) / (0 - -60))) + 0.53;//TO BE ABLE TO START UP THE SIZE OF THE WINDOW WITH THE CURRENT SLIDER VALUE WHEN PLUGIN UI IS CREATED
+     auto actualSliderValue = ((mGainSlider.getValue() - newMinimunRange) * ((1 - 0.53) / (0 - newMinimunRange))) + 0.53;//TO BE ABLE TO START UP THE SIZE OF THE WINDOW WITH THE CURRENT SLIDER VALUE WHEN PLUGIN UI IS CREATED
 
     setSize(width* actualSliderValue, height* actualSliderValue);//here we set the size of the plugin window 
     auto timeInhertz =15;
