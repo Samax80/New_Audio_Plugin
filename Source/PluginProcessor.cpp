@@ -22,6 +22,8 @@ New_audio_pluginAudioProcessor::New_audio_pluginAudioProcessor()
                        )
 #endif
 {
+
+    mOutputSmoothed = 0;
 }
 
 New_audio_pluginAudioProcessor::~New_audio_pluginAudioProcessor()
@@ -145,6 +147,13 @@ void New_audio_pluginAudioProcessor::processBlock (juce::AudioBuffer<float>& buf
         {
             channelData[sample] = channelData[sample] *juce::Decibels::decibelsToGain( mGain);           
         }
+
+        float absValue = std::fabs(channelData[0]);
+
+        auto kMeterSmoothingCoeff = 0.2;
+
+        mOutputSmoothed = kMeterSmoothingCoeff * (mOutputSmoothed - absValue) + absValue;
+        OutputlevelfromProcessor= mOutputSmoothed;
     }
 }
 
@@ -172,6 +181,29 @@ void New_audio_pluginAudioProcessor::setStateInformation (const void* data, int 
     // You should use this method to restore your parameters from this memory block,
     // whose contents will have been created by the getStateInformation() call.
 }
+
+float New_audio_pluginAudioProcessor::getMeterLevel()
+{
+    return mOutputSmoothed;
+}
+
+float New_audio_pluginAudioProcessor::getGainmeterLevel()//TODO FIX THIS!!!
+{
+   
+    const float normalizeddB = dbBToNormalizedGain(OutputlevelfromProcessor);
+
+    return normalizeddB;
+}
+
+float New_audio_pluginAudioProcessor::dbBToNormalizedGain(float inValue)
+{
+    float inValuedB = juce::Decibels::gainToDecibels(inValue + 0.00001f);//to avoid infinite values when inValue=0
+    inValuedB = (inValuedB + 96.0f) / 96.0f;
+
+    return inValuedB;
+}
+
+
 
 //==============================================================================
 // This creates new instances of the plugin..

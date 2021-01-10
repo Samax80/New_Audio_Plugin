@@ -57,10 +57,16 @@ public:
     /// The gain variable
     /// </summary>
     float mGain{-60};
-    
+
+    float getMeterLevel();
+    float getGainmeterLevel();
+    float dbBToNormalizedGain(float inValue);
+    float OutputlevelfromProcessor{0};
 
 
 private:
+
+    float mOutputSmoothed;
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (New_audio_pluginAudioProcessor)
 };

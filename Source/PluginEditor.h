@@ -10,6 +10,7 @@
 
 #include <JuceHeader.h>
 #include "PluginProcessor.h"
+#include "VuMeter.h" 
 
 //==============================================================================
 /**
@@ -61,6 +62,9 @@ private:
     /// The Gain slider Object 
     /// </summary>
     juce::Slider  mGainSlider;
+    //std::unique_ptr<VuMeter> mVuMeter;
+
+    juce::ScopedPointer< VuMeter>mVuMeter;
 
     // This reference is provided as a quick way for your editor to
     // access the processor object that created it.

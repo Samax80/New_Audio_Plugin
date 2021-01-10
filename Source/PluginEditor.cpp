@@ -20,6 +20,14 @@ New_audio_pluginAudioProcessorEditor::New_audio_pluginAudioProcessorEditor (New_
     // editor's size to whatever you need it to be.
     width = 200;
     height = 300;
+
+    //mVuMeter = std::make_unique<VuMeter>(&p);
+
+    mVuMeter = new VuMeter(&p);   
+
+    addAndMakeVisible(mVuMeter);
+
+
      auto actualSliderValue = ((mGainSlider.getValue() - -60) * ((1 - 0.53) / (0 - -60))) + 0.53;//TO BE ABLE TO START UP THE SIZE OF THE WINDOW WITH THE CURRENT SLIDER VALUE WHEN PLUGIN UI IS CREATED
 
     setSize(width* actualSliderValue, height* actualSliderValue);//here we set the size of the plugin window 
@@ -35,6 +43,10 @@ void New_audio_pluginAudioProcessorEditor::paint (juce::Graphics& g)
     // (Our component is opaque, so we must completely fill the background with a solid colour)
     auto backGroundColor = juce:: Colours::black;
     g.fillAll(backGroundColor);
+
+    mVuMeter->setParameterID(2);
+
+   // mVuMeter->paint(g);
 }
 
 void New_audio_pluginAudioProcessorEditor::resized()
@@ -44,6 +56,15 @@ void New_audio_pluginAudioProcessorEditor::resized()
     auto actualSliderValue = ((mGainSlider.getValue() - -60) * ((1 - 0.53) / (0 - (-60)))) + 0.53;
 
     mGainSlider.setBounds(getWidth() / 2 - 50 * actualSliderValue, getHeight() / 2 - 75 * actualSliderValue, 100* actualSliderValue, 150* actualSliderValue);
+
+    const int meter_width = 25;
+
+    mVuMeter->setBounds(((getWidth() * 0.25) - (meter_width * 0.25))*actualSliderValue,
+        ((getHeight() * 0.35) - (meter_width * 0.5))* actualSliderValue,
+        meter_width* actualSliderValue,
+        (getHeight() * 0.65)* actualSliderValue);
+
+   
 }
 
 void New_audio_pluginAudioProcessorEditor::InitializeSlider(juce::Slider& mGainSlider, juce::Slider::TextEntryBoxPosition newPosition, bool isReadOnly, int textEntryBoxWidth, int textEntryBoxHeight, juce::Slider::SliderStyle newStyle, double newMin, double newMax, double newInt, double newValue, juce::Slider::Listener * audio_pluginAudioProcessor)
@@ -54,7 +75,6 @@ void New_audio_pluginAudioProcessorEditor::InitializeSlider(juce::Slider& mGainS
     mGainSlider.setValue(newValue);
     mGainSlider.addListener(audio_pluginAudioProcessor);
     addAndMakeVisible(mGainSlider);//this makes the child to the component visible.
-
 }
 
 void New_audio_pluginAudioProcessorEditor::sliderValueChanged(juce::Slider* slider)
@@ -79,7 +99,6 @@ void New_audio_pluginAudioProcessorEditor::sliderValueChanged(juce::Slider* slid
             setSize(heightref, widthref);  
         }
                  
-        //TEST RESIZE UI SLIDER ENDSS
-          
+        //TEST RESIZE UI SLIDER ENDSS          
     }
 }
