@@ -31,6 +31,8 @@ New_audio_pluginAudioProcessorEditor::New_audio_pluginAudioProcessorEditor (New_
      auto actualSliderValue = ((mGainSlider.getValue() - -60) * ((1 - 0.53) / (0 - -60))) + 0.53;//TO BE ABLE TO START UP THE SIZE OF THE WINDOW WITH THE CURRENT SLIDER VALUE WHEN PLUGIN UI IS CREATED
 
     setSize(width* actualSliderValue, height* actualSliderValue);//here we set the size of the plugin window 
+    auto timeInhertz =15;
+    mVuMeter->SetVuTimerInHZ(timeInhertz);
 }
 
 New_audio_pluginAudioProcessorEditor::~New_audio_pluginAudioProcessorEditor()
@@ -44,9 +46,7 @@ void New_audio_pluginAudioProcessorEditor::paint (juce::Graphics& g)
     auto backGroundColor = juce:: Colours::black;
     g.fillAll(backGroundColor);
 
-    mVuMeter->setParameterID(2);
-
-   // mVuMeter->paint(g);
+    //mVuMeter->SetVuTimerInHZ(15);//This call juce::Timer::startTimerHz(timefrequencyHz);  
 }
 
 void New_audio_pluginAudioProcessorEditor::resized()

@@ -68,14 +68,9 @@ void VuMeter::timerCallback()
 	}
 }
 
-void VuMeter::setParameterID(int inParameterId)
+void VuMeter::SetVuTimerInHZ(int timeinhertz)
 {
-	mparameterId = inParameterId;
-
-	auto timefrequencyHz = 15;
-
-	juce::Timer::startTimerHz(timefrequencyHz);
-
+	juce::Timer::startTimerHz(timeinhertz);
 }
 
 float VuMeter::Denormalize(float inValue)

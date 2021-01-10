@@ -27,7 +27,7 @@ class VuMeter
 
 		void timerCallback() override;
 
-		void setParameterID(int inParameterId);
+		void SetVuTimerInHZ(int timeinhertz);
 
 		float Denormalize(float inValue);
 
