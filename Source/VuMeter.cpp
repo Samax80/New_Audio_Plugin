@@ -25,14 +25,15 @@ void VuMeter::paint(juce::Graphics& g)
 	const int meter_width = getWidth() / 3;
 
 	g.setColour(juce::Colours::blue);
-	//Left
+	//Left Rectangle
 	g.fillRect(0, 0, meter_width, getHeight());
 
-	//Right
+	//Right Rectangle
 	g.fillRect(meter_width * 2, 0, meter_width, getHeight());
 
+	//Left Rectangle fill
 	int ch0fill = getHeight() - (getHeight() *  mCh0Level);
-
+	//Right Rectangle fill
 	int ch1fill = getHeight() - (getHeight() * mCh1Level);
 
 	if (ch0fill < 0)
@@ -45,19 +46,20 @@ void VuMeter::paint(juce::Graphics& g)
 		ch1fill = 0;
 	}
 
+	//It paints the yellow (input) rectangles over the blue ones 
 	g.setColour(juce::Colours::yellow);
-	g.fillRect(0, ch0fill, meter_width, getHeight());
-	g.fillRect(meter_width * 2, ch1fill, meter_width, getHeight());
+	g.fillRect(0, ch0fill, meter_width, getHeight());//Fill left first
+	g.fillRect(meter_width * 2, ch1fill, meter_width, getHeight());//fill right after left
 }
 
 void VuMeter::timerCallback()
 {
-	float updateCh0Level = mProcessor->getGainmeterLevel(); //0.35f;//static value ,this will change
-	float updateCh1Level = mProcessor->getGainmeterLevel();
-	auto kMeterSmoothingCoeff = 0.2;
+	auto updateCh0Level = mProcessor->getGainmeterLevel(); //0.35f;//static value ,this will change
+	auto updateCh1Level = mProcessor->getGainmeterLevel();
+	auto kMeterSmoothingCoeff = 0.2f;
 
-	mCh0Level = mCh0Level > updateCh0Level ? updateCh0Level : kMeterSmoothingCoeff * (mCh0Level - updateCh0Level) + updateCh0Level;//smooth parameter	
-	mCh1Level = mCh1Level > updateCh1Level ? updateCh1Level : kMeterSmoothingCoeff * (mCh1Level - updateCh1Level) + updateCh1Level;//smooth parameter
+	mCh0Level = mCh0Level > updateCh0Level ? updateCh0Level : kMeterSmoothingCoeff * (mCh0Level - (float)updateCh0Level) + updateCh0Level;//smooth parameter	
+	mCh1Level = mCh1Level > updateCh1Level ? updateCh1Level : kMeterSmoothingCoeff * (mCh1Level - (float)updateCh1Level) + updateCh1Level;//smooth parameter
 	
 	mCh0Level = Denormalize(mCh0Level);
 	mCh1Level = Denormalize(mCh1Level);

@@ -52,16 +52,16 @@ public:
     /// <param name="slider">The slider.</param>
     void New_audio_pluginAudioProcessorEditor::sliderValueChanged(juce::Slider* slider) override;
 
-    int width;
-    int height;
-    int& widthref = width;
-    int& heightref = height;
+    double width;
+    double height;
 
 private:
     /// <summary>
     /// The Gain slider Object 
     /// </summary>
-    juce::Slider  mGainSlider;
+   juce::Slider  mGainSlider;
+
+    std::unique_ptr<juce::Slider> smGainSlider;
     //std::unique_ptr<VuMeter> mVuMeter;
 
     juce::ScopedPointer< VuMeter>mVuMeter;

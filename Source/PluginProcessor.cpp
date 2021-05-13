@@ -181,7 +181,7 @@ void New_audio_pluginAudioProcessor::setStateInformation (const void* data, int 
     // You should use this method to restore your parameters from this memory block,
     // whose contents will have been created by the getStateInformation() call.
 }
-
+ 
 float New_audio_pluginAudioProcessor::getMeterLevel()
 {
     return mOutputSmoothed;
