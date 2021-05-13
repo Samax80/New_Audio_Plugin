@@ -4,6 +4,8 @@
               addUsingNamespaceToJuceHeader="0" jucerFormatVersion="1">
   <MAINGROUP id="CluzHv" name="New_Audio_Plugin">
     <GROUP id="{67627340-E7E4-0D1C-8A77-D7DFBDC801AE}" name="Source">
+      <FILE id="ZVg3ch" name="VuMeter.h" compile="0" resource="0" file="Source/VuMeter.h"/>
+      <FILE id="Tj8DuJ" name="VuMeter.cpp" compile="1" resource="0" file="Source/VuMeter.cpp"/>
       <FILE id="Pvckqf" name="PluginProcessor.cpp" compile="1" resource="0"
             file="Source/PluginProcessor.cpp"/>
       <FILE id="JIzaVm" name="PluginProcessor.h" compile="0" resource="0"
